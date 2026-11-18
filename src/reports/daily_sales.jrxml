@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_sales" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+    <queryString>
+        <![CDATA[SELECT DATE(order_date) as sale_date, SUM(total_amount) as daily_sales, COUNT(order_id) as order_count FROM orders_902012598_902012661_902011766 WHERE status=’paid’ GROUP BY DATE(order_date) ORDER BY sale_date]]>
+    </queryString>
+    <field name="sale_date" class="java.sql.Date"/>
+    <field name="daily_sales" class="java.math.BigDecimal"/>
+    <field name="order_count" class="java.lang.Integer"/>
+    <title>
+        <band height="50">
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="30"/>
+                <text><![CDATA[Daily Sales Report]]></text>
+            </staticText>
+        </band>
+    </title>
+    <detail>
+        <band height="20">
+            <textField>
+                <reportElement x="0" y="0" width="150" height="20"/>
+                <textFieldExpression><![CDATA[$F{sale_date}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="200" y="0" width="100" height="20"/>
+                <textFieldExpression><![CDATA[$F{daily_sales}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="350" y="0" width="100" height="20"/>
+                <textFieldExpression><![CDATA[$F{order_count}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>
